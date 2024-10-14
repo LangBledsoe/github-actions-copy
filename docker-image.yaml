@@ -1,0 +1,30 @@
+# Name of the action 
+name: Build, Verify, and Push Docker Image
+
+# A trigger for when this action will run
+on:
+  push:
+    [wordflow_dispatch]
+
+jobs:
+  publish_images:
+    # runs on a ubuntu vm provided by github
+    runs-on: ubuntu-latest
+    # each step the job completes
+    # it can run commands, run setup taks, run an action, etc
+    steps:
+      # the name of the first step
+      - name: checkout
+        # reference the major version of a release
+        uses: actions/checkout@v4
+      # the name of the second step
+      - name: build image
+        # build the docker image
+        run:
+          docker build . -t my-app-image
+      # the name of the third step
+      - name: push image to docker hub
+        # login to docker hub (using secret) and push the image
+        run: |
+          docker login -u langbledsoe -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push my-app-image
