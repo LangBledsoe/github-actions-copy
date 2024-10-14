@@ -4,7 +4,7 @@ name: Build, Verify, and Push Docker Image
 # A trigger for when this action will run
 on:
   push:
-    [wordflow_dispatch]
+    [workflow_dispatch]
 
 jobs:
   publish_images:
