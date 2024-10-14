@@ -20,10 +20,10 @@ jobs:
       - name: build image
         # build the docker image
         run:
-          docker build . -t my-app-image
+          docker build . -t langbledsoe/docker-exercise:latest
       # the name of the third step
       - name: push image to docker hub
         # login to docker hub (using secret) and push the image
         run: |
-          docker login -u langbledsoe -p ${{ secrets.DOCKER_HUB_TOKEN }}
-          docker push my-app-image
+          echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u langbledsoe --password-stdin
+          docker push langbledsoe/docker-exercise:latest
