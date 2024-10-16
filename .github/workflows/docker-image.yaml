@@ -6,6 +6,12 @@ on:
   [workflow_dispatch]
 
 jobs:
+  # endpoint tests provided by Liatrio
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: run tests
+      uses: liatrio/github-actions/apprentice-action@master
   publish_images:
     # runs on a ubuntu vm provided by github
     runs-on: ubuntu-latest
