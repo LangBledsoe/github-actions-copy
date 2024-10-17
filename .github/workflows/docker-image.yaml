@@ -6,12 +6,6 @@ on:
   [workflow_dispatch]
 
 jobs:
-  # endpoint tests provided by Liatrio
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: run tests
-      uses: liatrio/github-actions/apprentice-action@master
   publish_images:
     # runs on a ubuntu vm provided by github
     runs-on: ubuntu-latest
@@ -25,11 +19,18 @@ jobs:
       # the name of the second step
       - name: build image
         # build the docker image
-        run:
+        run: |
           docker build . -t langbledsoe/docker-exercise:latest
+          docker run -d -p 80:80 langbledsoe/docker-exercise:latest
       # the name of the third step
       - name: push image to docker hub
         # login to docker hub (using secret) and push the image
         run: |
           echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u langbledsoe --password-stdin
           docker push langbledsoe/docker-exercise:latest
+  # endpoint tests provided by Liatrio
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: run tests
+      uses: liatrio/github-actions/apprentice-action@master
