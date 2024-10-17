@@ -21,7 +21,7 @@ jobs:
         # build the docker image
         run: |
           docker build . -t langbledsoe/docker-exercise:latest
-          docker run -d -p 80:80 langbledsoe/docker-exercise:latest
+          docker run --network host -d langbledsoe/docker-exercise:latest
           sleep 60
   
   # endpoint tests provided by Liatrio
