@@ -1,6 +1,6 @@
 # Specify the node base image with your desired version node:<version>
 # Each Dockerfile must begin with a FROM instuciton
-FROM node:20
+FROM node:16
 
 # The app directory created to be used as the location within the container
 # You can make this whatever you want, but this seems to be a common convention
@@ -23,4 +23,4 @@ EXPOSE 80
 
 # The command that gets run when the container is ready
 # Each value in the array is a seperate argument in the command line
-CMD ["node", "app.js"]
+CMD ["node", "index.js"]
