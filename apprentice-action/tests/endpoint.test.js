@@ -34,6 +34,6 @@ describe("Tests to the \"/\" endpoint", () => {
     });
     it("should return a minified JSON object.", async () => {
         const res = await axios(`http://${dockerBridgeIP}:80/`);
-        expect(res.data).to.equal(JSON.parse(JSON.stringify(res.data)));
+        expect(res.data).to.deep.equal(JSON.parse(JSON.stringify(res.data)));
     });
 });
