@@ -18,11 +18,11 @@ jobs:
         uses: actions/checkout@v4
       # the name of the second step
       - name: build image
-        # build the docker image
+        # build the docker image and container
         run: |
           docker build . -t langbledsoe/docker-exercise:latest
-          docker run --network="host" -d langbledsoe/docker-exercise:latest
-          sleep 60
+          docker run -d -p 80:80 langbledsoe/docker-exercise:latest
+          sleep 10
   
   # endpoint tests provided by Liatrio
   build:
@@ -30,6 +30,8 @@ jobs:
     # publish_images needs to finish first
     needs: [publish_images]
     steps:
+    - name: checkout
+      uses: actions/checkout@v4
     - name: run tests
       uses: liatrio/github-actions/apprentice-action@master
       # the name of the third step
