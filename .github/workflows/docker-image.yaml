@@ -43,6 +43,8 @@ jobs:
     # the rest of this job will only run if the other two jobs succeeded
     if: success()
     steps:
+      - name: checkout
+        uses: actions/checkout@v4
       - name: push image to docker hub
         # login to docker hub (using secret) and push the image
         run: |
